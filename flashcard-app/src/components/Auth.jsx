@@ -2,60 +2,49 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const AuthForm = ({ handleLogin }) => {
-  // State to track whether we're showing login or register form
   const [isLogin, setIsLogin] = useState(true);
   
-  // Form input states
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   
-  // Loading and error states
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   
-  // Handle form submission for registration
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
     
     try {
-      // Registration logic
       if (password !== confirmPassword) {
         setError('Passwords do not match!');
         setIsLoading(false);
         return;
       }
       
-      // Call the registration API
       const response = await axios.post('http://localhost:5000/auth/register', {
         name,
         email,
         password
       });
       
-      // If successful, store the token and user info
       if (response.data && response.data.token) {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
         
-        // Reset form after successful submission
         setName('');
         setEmail('');
         setPassword('');
         setConfirmPassword('');
         
-        // Switch to login after successful registration
         setIsLogin(true);
         
-        // Show success message
         alert('Registration successful! Please log in.');
       }
       
     } catch (err) {
-      // Handle error responses from server
       const errorMessage = err.response?.data?.message || 'An error occurred during registration';
       setError(errorMessage);
       console.error('Registration error:', err);
@@ -64,7 +53,6 @@ const AuthForm = ({ handleLogin }) => {
     }
   };
   
-  // Handle login using the provided handleLogin prop
   const onLoginSubmit = (e) => {
     e.preventDefault();
     
@@ -125,7 +113,7 @@ const AuthForm = ({ handleLogin }) => {
           <a
             className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
             href="#"
-            onClick={(e) => {e.preventDefault(); /* Handle forgot password logic */}}
+            onClick={(e) => {e.preventDefault(); }}
           >
             Forgot Password?
           </a>

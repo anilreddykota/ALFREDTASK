@@ -29,8 +29,7 @@ const FlashcardApp = () => {
   const [showAddCard, setShowAddCard] = useState(false);
   const [newCard, setNewCard] = useState({ question: "", answer: "", box: 1 });
 
-  // Number of days to wait before reviewing again based on box number
-  const boxIntervals = [0, 1, 3, 7, 14, 30]; // Box 0 isn't used, starts at box 1
+  const boxIntervals = [0, 1, 3, 7, 14, 30]; 
 
 
 
