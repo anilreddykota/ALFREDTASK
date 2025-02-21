@@ -366,14 +366,14 @@ const FlashcardApp = ({api}) => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+    <div className="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
       {/* Navbar */}
       <nav className="bg-white dark:bg-gray-800 shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <h1 className="text-xl font-bold text-gray-800 dark:text-white">
-                FlashCard App
+                FlashCard <sub className="text-sfont-bold text-blue-500 dark:text-white">by ARW</sub>
               </h1>
             </div>
             <div className="flex items-center space-x-4">
@@ -418,7 +418,7 @@ const FlashcardApp = ({api}) => {
         </div>
       </nav>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+      <div className="flex-grow max-w-7xl min-w-xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
           <div className="flex justify-between items-center mb-2">
             <h2 className="text-lg font-medium text-gray-800 dark:text-white">
@@ -453,7 +453,7 @@ const FlashcardApp = ({api}) => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pb-16">
+      <div className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pb-16">
         {flashcards.length > 0 ? (
           <div className="flex justify-center">
             <AnimatePresence mode="wait">
@@ -559,6 +559,11 @@ const FlashcardApp = ({api}) => {
 
       {renderStats()}
       {renderAddCardForm()}
+      <footer className="bg-white dark:bg-gray-800 text-center py-4 mt-8 shadow-inner">
+        <p className="text-gray-600 dark:text-gray-300">
+          Created by <a href="https://github.com/anilreddykota" className="text-blue-500 dark:text-blue-400 hover:underline">Anil Kumar reddy Kota</a>
+        </p>
+      </footer>
     </div>
   );
 };
