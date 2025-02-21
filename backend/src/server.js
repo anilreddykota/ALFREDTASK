@@ -9,10 +9,13 @@ app.use(express.json());
 app.use(cors());
 
 // JWT Secret
-const JWT_SECRET = 'your-secret-key'; // In production, use environment variables
+const JWT_SECRET = 'flashcard'; // In production, use environment variables
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/flashcards', {
+
+const dburl = "mongodb+srv://anilreddykota:anil.kota.srkrec.sm@cluster0.a3hrp.mongodb.net/flashcards";
+
+mongoose.connect(dburl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
