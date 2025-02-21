@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -65,7 +65,7 @@ const FlashcardApp = () => {
     try {
       setLoading(true);
       const response = await axios.get("http://localhost:5000/flashcards/due");
-      setFlashcards(response.data);
+      setFlashcards(response.data.cards);
       setProgress({
         today: response.data.dueToday,
         total: response.data.total,
