@@ -4,13 +4,13 @@ import FlashcardApp from './components/FlashCards'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 // import Admin from './components/Admin'
-
+const api = "https://flashcard-learning-psi.vercel.app";
 function App() {
 
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<FlashcardApp />} />
+        <Route path="/" element={<FlashcardApp api={api}/>} />
         {/* <Route path="/admin" element={<Admin />} /> */}
       </Routes>
     </Router>

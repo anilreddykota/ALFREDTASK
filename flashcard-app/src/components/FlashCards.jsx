@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import AuthForm from "./Auth";
 
-const FlashcardApp = () => {
+const FlashcardApp = ({api}) => {
   const [flashcards, setFlashcards] = useState([]);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
@@ -48,7 +48,7 @@ const FlashcardApp = () => {
       const token = localStorage.getItem("token");
       if (token) {
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-        const response = await axios.get("http://localhost:5000/auth/me");
+        const response = await axios.get(api+"/auth/me");
         setUser(response.data);
         setIsLoggedIn(true);
       } else {
@@ -64,7 +64,7 @@ const FlashcardApp = () => {
   const fetchFlashcards = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:5000/flashcards/due");
+      const response = await axios.get(api+"/flashcards/due");
       setFlashcards(response.data.cards);
       setProgress({
         today: response.data.dueToday,
@@ -80,7 +80,7 @@ const FlashcardApp = () => {
 
   const handleLogin = async (email,password) => {
     try {
-      const response = await axios.post("http://localhost:5000/auth/login", {
+      const response = await axios.post(api+"/auth/login", {
         email,
         password
       });
@@ -122,7 +122,7 @@ const FlashcardApp = () => {
     nextReviewDate.setDate(nextReviewDate.getDate() + boxIntervals[newBox]);
 
     try {
-      await axios.put(`http://localhost:5000/flashcards/${currentCard._id}`, {
+      await axios.put(`${api}/flashcards/${currentCard._id}`, {
         correct,
         box: newBox,
         nextReviewDate: nextReviewDate.toISOString(),
@@ -148,7 +148,7 @@ const FlashcardApp = () => {
       const nextReviewDate = new Date();
       nextReviewDate.setDate(nextReviewDate.getDate() + boxIntervals[1]);
 
-      await axios.post("http://localhost:5000/flashcards", {
+      await axios.post(api+"/flashcards", {
         ...newCard,
         nextReviewDate: nextReviewDate.toISOString(),
       });
@@ -360,7 +360,7 @@ const FlashcardApp = () => {
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
 
-    <AuthForm handleLogin={handleLogin} />
+    <AuthForm handleLogin={handleLogin} api={api} />
     
     </div>);
   }

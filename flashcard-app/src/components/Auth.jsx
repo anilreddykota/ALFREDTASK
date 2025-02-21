@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const AuthForm = ({ handleLogin }) => {
+const AuthForm = ({ handleLogin,api }) => {
   const [isLogin, setIsLogin] = useState(true);
   
   const [email, setEmail] = useState('');
@@ -24,7 +24,7 @@ const AuthForm = ({ handleLogin }) => {
         return;
       }
       
-      const response = await axios.post('http://localhost:5000/auth/register', {
+      const response = await axios.post(api+'/auth/register', {
         name,
         email,
         password
